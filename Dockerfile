@@ -24,8 +24,8 @@ VOLUME ["/var/lib/redis"]
 #设置容器端口
 EXPOSE 4000
 #运行云监工
-RUN /etc/init.d/redis-server restart
-RUN python3.4 ./crysadm/crysadm/crysadm_helper.py  &
-RUN python3.4 ./crysadm/crysadm/crysadm.py &
-#CMD ["./crysadm/run.sh"]    
+#RUN /etc/init.d/redis-server restart
+#RUN python3.4 ./crysadm/crysadm/crysadm_helper.py  &
+#RUN python3.4 ./crysadm/crysadm/crysadm.py &
+CMD ["python3.4","./crysadm/crysadm/crysadm_helper.py  &","./crysadm/crysadm/crysadm.py  &"]    
 
