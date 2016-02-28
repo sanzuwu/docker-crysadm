@@ -4,7 +4,7 @@
 FROM ubuntu:14.04
 MAINTAINER sanzuwu <sanzuwu@gmail.com>
 #切换国内源
-RUN /bin/sed -i.bak 's/archive/cn\.archive/' /etc/apt/sources.list
+#RUN /bin/sed -i.bak 's/archive/cn\.archive/' /etc/apt/sources.list
 RUN rm /bin/sh &&  ln -s /bin/bash /bin/sh
 #更新，安装git，wget
 RUN apt-get update && apt-get install -y git wget
@@ -20,12 +20,12 @@ RUN pip3.4 install redis && sudo pip3.4 install requests && sudo pip3.4 install 
 RUN apt-get clean 
 #脚本加运行权限
 RUN chmod +x ./crysadm/run.sh ./crysadm/down.sh
-VOLUME /var/lib/redis
+VOLUME ["/var/lib/redis"]
 #设置容器端口
 EXPOSE 4000
-#RUN /etc/init.d/redis-server restart
-#RUN python3.4 ./crysadm/crysadm/crysadm_helper.py >> /tmp/error 2>&1 &
-#RUN python3.4 ./crysadm/crysadm/crysadm.py >> /tmp/error 2>&1 &
 #运行云监工
-CMD ["./crysadm/run.sh"]    
+RUN /etc/init.d/redis-server restart
+RUN python3.4 ./crysadm/crysadm/crysadm_helper.py  &
+RUN python3.4 ./crysadm/crysadm/crysadm.py &
+#CMD ["./crysadm/run.sh"]    
 
