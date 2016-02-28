@@ -17,6 +17,7 @@ RUN pip3.4 install redis && sudo pip3.4 install requests && sudo pip3.4 install 
 RUN apt-get clean 
 RUN chmod +x ./crysadm/run.sh ./crysadm/down.sh
 VOLUME /var/lib/redis
+EXPOSE 4000
 RUN /etc/init.d/redis-server restart
 RUN python3.4 ./crysadm/crysadm/crysadm_helper.py >> /tmp/error 2>&1 &
 RUN python3.4 ./crysadm/crysadm/crysadm.py >> /tmp/error 2>&1 &
