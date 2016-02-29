@@ -32,9 +32,9 @@ EXPOSE 4000
 EXPOSE 22
 #将云监工启动脚本加入运行脚本/run.sh
 RUN chmod +w /run.sh
-#RUN echo "/app/crysadm/run.sh" >>/run.sh
+RUN echo "/app/crysadm/run.sh" >>/set_root_pw.sh
 #运行云监工
-RUN echo "/etc/init.d/redis-server restart" >>/set_root_pw.sh
+#RUN echo "/etc/init.d/redis-server restart" >>/set_root_pw.sh
 #RUN python3.4 ./crysadm/crysadm/crysadm_helper.py  &
 #RUN python3.4 ./crysadm/crysadm/crysadm.py &
 #CMD ["python3.4","crysadm/crysadm/crysadm_helper.py  &","crysadm/crysadm/crysadm.py  &"]    
