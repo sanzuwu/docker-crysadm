@@ -9,22 +9,22 @@ RUN rm /bin/sh &&  ln -s /bin/bash /bin/sh
 #更新，安装git，wget
 RUN apt-get update && apt-get install -y git wget 
 #启动ssh服务
-RUN service ssh start
+#RUN service ssh start
 #创建工作目录
 RUN mkdir /app 
 WORKDIR /app
 #下载云监工源代码
 RUN git clone https://github.com/sanzuwu/crysadm.git
-#安装python，redis
-#RUN apt-get install -y python3.4 python3.4-dev redis-server
-#RUN chmod +x ./crysadm/get-pip.py
-#RUN python3.4 ./crysadm/get-pip.py
-#RUN pip3.4 install redis && sudo pip3.4 install requests && sudo pip3.4 install flask
-#RUN apt-get clean 
-#脚本加运行权限
-RUN chmod +x ./crysadm/run.sh ./crysadm/down.sh ./crysadm/setup.sh
 #redis数据库保存目录
 VOLUME ["/var/lib/redis"]
+#安装python，redis
+RUN apt-get install -y python3.4 python3.4-dev redis-server
+RUN chmod +x ./crysadm/get-pip.py
+RUN python3.4 ./crysadm/get-pip.py
+RUN pip3.4 install redis && sudo pip3.4 install requests && sudo pip3.4 install flask
+RUN apt-get clean 
+#脚本加运行权限
+RUN chmod +x ./crysadm/run.sh ./crysadm/down.sh ./crysadm/setup.sh
 #设置容器端口
 #云监工端口
 EXPOSE 4000
@@ -35,4 +35,4 @@ EXPOSE 22
 #RUN python3.4 ./crysadm/crysadm/crysadm_helper.py  &
 #RUN python3.4 ./crysadm/crysadm/crysadm.py &
 #CMD ["python3.4","crysadm/crysadm/crysadm_helper.py  &","crysadm/crysadm/crysadm.py  &"]    
-CMD ["/app/crysadm/setup.sh"]
+CMD ["/app/crysadm/run.sh"]
