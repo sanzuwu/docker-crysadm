@@ -30,6 +30,9 @@ RUN chmod +x ./crysadm/run.sh ./crysadm/down.sh ./crysadm/setup.sh
 EXPOSE 4000
 #ssh端口
 EXPOSE 22
+#将云监工启动脚本加入运行脚本/run.sh
+RUN chmod +w /run.sh
+RUN echo "sh /app/crysadm/run.sh" >>/run.sh
 #运行云监工
 #RUN /etc/init.d/redis-server restart
 #RUN python3.4 ./crysadm/crysadm/crysadm_helper.py  &
