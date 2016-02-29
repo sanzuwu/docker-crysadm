@@ -6,8 +6,8 @@ MAINTAINER sanzuwu <sanzuwu@gmail.com>
 #切换国内源
 #RUN /bin/sed -i.bak 's/archive/cn\.archive/' /etc/apt/sources.list
 RUN rm /bin/sh &&  ln -s /bin/bash /bin/sh
-#更新，安装git，wget
-RUN apt-get update && apt-get install -y git wget 
+#更新，安装git，wget，sudo
+RUN apt-get update && apt-get install -y git wget sudo
 #启动ssh服务
 #RUN service ssh start
 #创建工作目录
