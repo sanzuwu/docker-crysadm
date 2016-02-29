@@ -1,13 +1,13 @@
 # 这是迅雷云监工的docker程序
 # 云监工原作者powergx
 
-FROM ubuntu:14.04
+FROM tutum/ubuntu:trusty
 MAINTAINER sanzuwu <sanzuwu@gmail.com>
 #切换国内源
 #RUN /bin/sed -i.bak 's/archive/cn\.archive/' /etc/apt/sources.list
 RUN rm /bin/sh &&  ln -s /bin/bash /bin/sh
 #更新，安装git，wget
-RUN apt-get update && apt-get install -y git wget openssh-server
+RUN apt-get update && apt-get install -y git wget 
 #启动ssh服务
 RUN service ssh start
 #创建工作目录
@@ -23,9 +23,13 @@ RUN git clone https://github.com/sanzuwu/crysadm.git
 #RUN apt-get clean 
 #脚本加运行权限
 RUN chmod +x ./crysadm/run.sh ./crysadm/down.sh ./crysadm/setup.sh
+#redis数据库保存目录
 VOLUME ["/var/lib/redis"]
 #设置容器端口
+#云监工端口
 EXPOSE 4000
+#ssh端口
+EXPOSE 22
 #运行云监工
 #RUN /etc/init.d/redis-server restart
 #RUN python3.4 ./crysadm/crysadm/crysadm_helper.py  &
