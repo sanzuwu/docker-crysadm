@@ -35,4 +35,4 @@ EXPOSE 22
 #RUN python3.4 ./crysadm/crysadm/crysadm_helper.py  &
 #RUN python3.4 ./crysadm/crysadm/crysadm.py &
 #CMD ["python3.4","crysadm/crysadm/crysadm_helper.py  &","crysadm/crysadm/crysadm.py  &"]    
-CMD ["/app/crysadm/run.sh"]
+#CMD ["/app/crysadm/run.sh"]
