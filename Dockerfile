@@ -3,13 +3,17 @@
 
 FROM tutum/ubuntu:trusty
 MAINTAINER sanzuwu <sanzuwu@gmail.com>
-#切换国内源
-#RUN /bin/sed -i.bak 's/archive/cn\.archive/' /etc/apt/sources.list
+
 RUN rm /bin/sh &&  ln -s /bin/bash /bin/sh
+
+#设置时区为北京时区
+RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+#设置时区服务器
+RUN ntpdate  ntp1.aliyun.com
+
 #更新，安装git，wget，sudo
 RUN apt-get update && apt-get install -y git wget sudo
-#启动ssh服务
-#RUN service ssh start
+
 #创建工作目录
 RUN mkdir /app 
 WORKDIR /app
@@ -30,12 +34,9 @@ RUN chmod +x ./crysadm/run.sh ./crysadm/down.sh ./crysadm/setup.sh
 EXPOSE 4000
 #ssh端口
 EXPOSE 22
-#将云监工启动脚本加入运行脚本/run.sh
-RUN chmod +w /run.sh
+
+RUN chmod +w /set_root_pw.sh
+#添加运行脚本
 RUN echo "/app/crysadm/run.sh" >>/set_root_pw.sh
-#运行云监工
-#RUN echo "/etc/init.d/redis-server restart" >>/set_root_pw.sh
-#RUN python3.4 ./crysadm/crysadm/crysadm_helper.py  &
-#RUN python3.4 ./crysadm/crysadm/crysadm.py &
-#CMD ["python3.4","crysadm/crysadm/crysadm_helper.py  &","crysadm/crysadm/crysadm.py  &"]    
-#CMD ["/app/crysadm/run.sh"]
+RUN echo "/bin/bash" >>/set_root_pw.sh
+
