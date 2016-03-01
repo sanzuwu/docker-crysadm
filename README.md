@@ -2,12 +2,17 @@
 
 此版本增加了自动提现功能
 
-云监工程序docker版
+云监工程序docker版，以tutum/ubuntu：trsy为母镜像
 
-版本debian是基于debian8.3运行，0.4版是基于ubuntu14.04运行，进入后运行“./crysadm/run.sh”
-
-在自己docker可以运行，在daocloud不能运行，不知什么原因
+适用于所有docker平台
 
 外接卷路径/var/lib/redis，就是redis数据库存放目录
 
-容器端口4000
+容器端口云监工端口4000 ssh端口22，可以ssh到容器，root密码在日志查找
+
+此云监工源代码提取自 https://gitbhub.com/sanzuwu/crysadm.git
+
+也是我fork自别人，如果有更新，我会更新的
+
+不足之处：服务器时区不是北京时区，不能定时重启云监工，这些都需要ssh或控制台自己实现
+
