@@ -9,7 +9,7 @@ RUN rm /bin/sh &&  ln -s /bin/bash /bin/sh
 #设置时区为北京时区
 RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 #设置时区服务器
-RUN ntpdate  ntp1.aliyun.com
+#RUN ntpdate  ntp1.aliyun.com
 
 #更新，安装git，wget，sudo
 RUN apt-get update && apt-get install -y git wget sudo
