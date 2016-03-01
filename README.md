@@ -2,7 +2,7 @@
 
 此版本增加了自动提现功能
 
-云监工程序docker版，以tutum/ubuntu：trsy为母镜像
+云监工程序docker版，以tutum/ubuntu:trusty为母镜像
 
 适用于所有docker平台
 
