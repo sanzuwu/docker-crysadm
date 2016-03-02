@@ -19,6 +19,8 @@ RUN mkdir /app
 WORKDIR /app
 #下载云监工源代码
 RUN git clone https://github.com/sanzuwu/crysadm.git
+#添加计划任务每小时运行云监工
+RUN echo '0 * * * * root sh /app/crysadm/run.sh' >> /etc/crontab
 #redis数据库保存目录
 VOLUME ["/var/lib/redis"]
 #安装python，redis
@@ -38,5 +40,6 @@ EXPOSE 22
 RUN chmod +w /set_root_pw.sh
 #添加运行脚本
 RUN echo "/app/crysadm/run.sh" >>/set_root_pw.sh
+RUN echo "cron start" >>/set_root_pw.sh
 RUN echo "/bin/bash" >>/set_root_pw.sh
 
