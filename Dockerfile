@@ -1,6 +1,6 @@
 # 这是迅雷云监工的docker程序
 # 云监工原作者powergx
-
+#update time 2016.03.04 15:20 
 FROM tutum/ubuntu:trusty
 MAINTAINER sanzuwu <sanzuwu@gmail.com>
 
@@ -20,7 +20,7 @@ WORKDIR /app
 #下载云监工源代码
 RUN git clone https://github.com/sanzuwu/crysadm.git
 #添加计划任务每小时运行云监工
-RUN echo '0 * * * * root sh /app/crysadm/run.sh' >> /etc/crontab
+#RUN echo '0 * * * * root sh /app/crysadm/run.sh' >> /etc/crontab
 #redis数据库保存目录
 VOLUME ["/var/lib/redis"]
 #安装python，redis
@@ -30,7 +30,7 @@ RUN python3.4 ./crysadm/get-pip.py
 RUN pip3.4 install redis && sudo pip3.4 install requests && sudo pip3.4 install flask
 RUN apt-get clean 
 #脚本加运行权限
-RUN chmod +x ./crysadm/run.sh ./crysadm/down.sh ./crysadm/setup.sh
+RUN chmod +x ./crysadm/run.sh ./crysadm/down.sh ./crysadm/setup.sh ./crysadm/cron.sh
 #设置容器端口
 #云监工端口
 EXPOSE 4000
@@ -40,6 +40,6 @@ EXPOSE 22
 RUN chmod +w /set_root_pw.sh
 #添加运行脚本
 RUN echo "/app/crysadm/run.sh" >>/set_root_pw.sh
-RUN echo "cron start" >>/set_root_pw.sh
+RUN echo "/app/crysadm/cron.sh" >>/set_root_pw.sh
 RUN echo "/bin/bash" >>/set_root_pw.sh
 
