@@ -14,7 +14,7 @@
 ***   
 ## 2016.03.21 更新0321
 ***    
-3月21日@爱转角遇见了谁更新，说明见 https://github.com/sanzuwu/crysadm/tree/master/crysadm     
+3月21日@爱转角遇见了谁更新源代码，说明见 https://github.com/sanzuwu/crysadm/tree/master/crysadm     
 ***     
 
 ##  2016.03.18 更新azjcode版本
