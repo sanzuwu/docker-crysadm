@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y git wget sudo vim nginx
 RUN mkdir /app 
 WORKDIR /app
 #下载云监工源代码
-RUN git clone https://github.com/sanzuwu/crysadm.git
+RUN git clone https://github.com/achaoge/crysadm.git
 #添加计划任务每小时运行云监工
 #RUN echo '0 * * * * root sh /app/crysadm/run.sh' >> /etc/crontab
 #redis数据库保存目录
