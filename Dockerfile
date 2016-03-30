@@ -12,17 +12,16 @@ RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 #RUN ntpdate  ntp1.aliyun.com
 
 #更新，安装git，wget，sudo
-RUN apt-get update && apt-get install -y git wget sudo vim nginx
+RUN apt-get update && apt-get install -y git wget sudo vim nginx curl
 
 #创建工作目录
 RUN mkdir /app 
-WORKDIR /app
+RUN cd /app
 #下载云监工源代码
 RUN git clone https://github.com/sanzuwu/crysadm.git
 #添加计划任务每小时运行云监工
 #RUN echo '0 * * * * root sh /app/crysadm/run.sh' >> /etc/crontab
-#redis数据库保存目录
-VOLUME ["/var/lib/redis"]
+
 #安装python，redis
 RUN apt-get install -y python3.4 python3.4-dev redis-server
 RUN chmod +x ./crysadm/get-pip.py
@@ -36,14 +35,18 @@ RUN apt-get clean
 
 #脚本加运行权限
 RUN chmod +x ./crysadm/run.sh ./crysadm/down.sh ./crysadm/setup.sh  ./crysadm/cron.sh
+#redis数据库保存目录
+VOLUME ["/var/lib/redis"]
 
 #设置容器端口
+#设置反向代理端口
+EXPOSE 80
 #云监工端口
 EXPOSE 4000
 #ssh端口
 EXPOSE 22
-#设置反向代理端口
-EXPOSE 80
+
+WORKDIR /app
 
 RUN chmod +w /set_root_pw.sh
 #添加运行脚本
