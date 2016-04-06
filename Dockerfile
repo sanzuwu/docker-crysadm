@@ -16,7 +16,8 @@ RUN apt-get update && apt-get install -y git wget sudo vim nginx curl
 
 #创建工作目录
 RUN mkdir /app 
-RUN cd /app
+WORKDIR /app
+#RUN cd /app
 #下载云监工源代码
 RUN git clone https://github.com/achaoge/crysadm.git
 #添加计划任务每小时运行云监工
@@ -46,7 +47,6 @@ EXPOSE 4000
 #ssh端口
 EXPOSE 22
 
-WORKDIR /app
 
 RUN chmod +w /set_root_pw.sh
 #添加运行脚本
